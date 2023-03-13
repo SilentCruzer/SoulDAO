@@ -16,6 +16,7 @@ contract SoulDAO {
         erc1155Address=_erc1155Address;
         sbtAddress=_sbtAddress;
         members[msg.sender] = MemberType.Master;
+        tokenId = 1;
     }
 
     function joinDao() external {
