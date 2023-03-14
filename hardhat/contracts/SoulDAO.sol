@@ -9,7 +9,7 @@ contract SoulDAO {
     enum VoteStates {Absent, Yes, No}
     mapping (address => MemberType ) public members;
     address private erc1155Address;
-    address private sbtAddress;
+    address public sbtAddress;
     uint tokenId;
 
     constructor(address _erc1155Address, address _sbtAddress){
@@ -27,6 +27,11 @@ contract SoulDAO {
 
         require(erc1155.balanceOf(msg.sender, tokenId) > 0, "You must have the required ERC1155 token to join the DAO");
         members[msg.sender] = MemberType.Apprentice;
+    }
+
+    function promoteMember(address member) internal {
+        require(members[member] == MemberType.Apprentice, "Specified user does not have a Apprentice role");
+        members[member] = MemberType.Master;
     }
 
 }
