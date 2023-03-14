@@ -3,6 +3,10 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 
+interface ISBT{
+    function mintSBT(address recipient, string memory tokenURI) external;
+}
+
 
 contract SoulDAO {
     enum MemberType {Master, Apprentice}
@@ -32,6 +36,15 @@ contract SoulDAO {
     function promoteMember(address member) internal {
         require(members[member] == MemberType.Apprentice, "Specified user does not have a Apprentice role");
         members[member] = MemberType.Master;
+    }
+
+    function setSBTAddress(address _sbtAddress) external {
+        sbtAddress = _sbtAddress;
+    }
+
+    function issueSBT(address recipient, string memory tokenURI) internal {
+        ISBT isbt = ISBT(sbtAddress);
+        isbt.mintSBT(recipient, tokenURI);
     }
 
 }
