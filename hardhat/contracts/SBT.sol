@@ -16,7 +16,6 @@ contract SBT is Ownable, ERC721URIStorage {
  
     Counters.Counter private _tokenIdCounter;
     
-
      constructor(address _daoAddress) ERC721("SoulBoundToken", "SBT") {
         daoAddress=_daoAddress;
      }
@@ -27,6 +26,7 @@ contract SBT is Ownable, ERC721URIStorage {
         _tokenIdCounter.increment();
         _mint(recipient, tokenId);
         _setTokenURI(tokenId, tokenURI);
+        tokenHolders[tokenId] = recipient;
      }
 
      function burn(uint256 tokenId) external {
