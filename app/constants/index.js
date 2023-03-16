@@ -1,5 +1,3 @@
-
-    
     const membershipAddress = '0x4460c1E8591a66291F0981AE4e271B514a578292';
     const daoAddress = '0x8A18A460a219204f758bFd478C648B330762bE96';
     const sbtAddress = '0xDaE6a25ee75407261e24c2F249689b65Eb9CC82D';
