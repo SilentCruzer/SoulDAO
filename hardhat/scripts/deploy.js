@@ -1,31 +1,61 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const { ethers } = require('hardhat');
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const privateKey = process.env.PRIVATE_KEY;
+  const rpcUrl = process.env.RPC_URL;
 
-  const lockedAmount = hre.ethers.utils.parseEther("0.001");
+  const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+  const signer = new ethers.Wallet(privateKey, provider);
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const Membership = await ethers.getContractFactory('Membership');
+  const membership = await Membership.deploy();
+  await membership.deployed();
 
-  await lock.deployed();
+  const DAO = await ethers.getContractFactory("SoulDAO");
+  dao = await DAO.deploy(membership.address);
+  await dao.deployed();
 
-  console.log(
-    `Lock with ${ethers.utils.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  const SBT = await ethers.getContractFactory("SBT");
+  sbt = await SBT.deploy(dao.address);
+  await sbt.deployed();
+
+  dao.connect(signer).setSBTAddress(sbt.address);
+
+  const constantsFolderPath = "/home/silentcruzer/dev/blockchain/soulDAO/app/constants";
+  if (!fs.existsSync(constantsFolderPath)) {
+    fs.mkdirSync(constantsFolderPath);
+  }
+
+  const memABI = membership.interface.abi;
+  const daoABI = dao.interface.abi;
+  const sbtABI = sbt.interface.abi;
+
+  const indexFilePath = path.join(constantsFolderPath, 'index.js');
+  const indexFileContent = `
+    
+    const membershipAddress = '${membership.address}';
+    const daoAddress = '${dao.address}';
+    const sbtAddress = '${sbt.address}';
+    
+    const membershipABI = '${memABI}';
+    const sbtABI = '${sbtABI}';
+    const daoABI = '${daoABI}';
+
+    module.exports = {
+      membershipABI,
+      membershipAddress,
+      daoABI,
+      daoAddress,
+      sbtABI,
+      sbtAddress
+    };
+  `;
+  fs.writeFileSync(indexFilePath, indexFileContent);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

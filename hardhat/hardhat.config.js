@@ -1,7 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
-const { API_URL, PRIVATE_KEY } = process.env;
+const { RPC_URL, PRIVATE_KEY } = process.env;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
   networks: {
     hardhat: {},
     goerli: {
-      url: API_URL,
+      url: RPC_URL,
       accounts: [PRIVATE_KEY],
     },
   },

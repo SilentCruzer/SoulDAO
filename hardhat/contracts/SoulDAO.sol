@@ -126,4 +126,8 @@ contract SoulDAO {
         ISBT isbt = ISBT(sbtAddress);
         isbt.mintSBT(recipient, tokenURI);
     }
+
+    function getTotalProposals() public view returns(uint) {
+        return proposalIds.length;
+    }
 }
