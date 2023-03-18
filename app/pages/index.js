@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { membershipABI, membershipAddress, daoABI, daoAddress } from "@/constants";
+import { useRouter } from "next/router";
 
 const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL);
 
@@ -15,6 +16,7 @@ export default function MyComponent() {
 
   const memberContract = new ethers.Contract(membershipAddress, membershipABI, provider);
   const daoContract = new ethers.Contract(daoAddress, daoABI, provider);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
@@ -116,7 +118,7 @@ export default function MyComponent() {
         <>
           <h1 className="text-2xl font-bold mb-4">Welcome back!</h1>
           <div className="flex flex-row gap-4">
-            <button onClick={() => console.log("View proposals clicked")}>
+            <button onClick={() => router.push("/proposals")}>
               View Proposals
             </button>
             <button onClick={() => console.log("View SBT clicked")}>
