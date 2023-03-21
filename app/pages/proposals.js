@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ethers } from "ethers";
 import {
     daoABI,
@@ -18,6 +18,9 @@ const proposals = () => {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletErrorMessage, setWalletErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [proposals , setProposals] = useState([]);
+  const dataFetchedRef = useRef(false);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -31,15 +34,22 @@ const proposals = () => {
         setIsWalletConnected(true);
 
         try {
-            const result = await daoContract.getTotalProposals();
-            console.log(result.toNumber());
+            const getTotalProposal = await daoContract.getTotalProposals();
+            const totalProposal = getTotalProposal.toNumber();
+              for(let i=0;i<totalProposal;i++){
+                const prop = await daoContract.proposals(i);
+                if(!prop.isExecuted)
+                  proposals.push(prop);
+              }
+            console.log(proposals);
         } catch (error) {
             console.log(error)
         }
         setIsLoading(false);
       }
     }
-
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     fetchData();
   }, []);
 
