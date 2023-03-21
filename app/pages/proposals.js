@@ -75,7 +75,26 @@ const proposals = () => {
   }
 
   return <div className="flex flex-col items-center justify-center h-screen">
-
+    <div className="flex flex-col">
+      {proposals.map((proposal, index) => (
+        <div key={index} className="flex justify-between items-center bg-gray-100 p-4 mb-4 rounded-lg">
+          <div>
+            <div className="text-lg font-semibold">Proposer: {proposal.proposer}</div>
+            <div className="text-lg font-semibold">Type: {proposal.typ}</div>
+            <div className="text-lg font-semibold">Target: {proposal.member}</div>
+            <div className="text-lg font-semibold">Yes votes: {proposal.yesVotes.toNumber()}</div>
+          </div>
+          <div className="flex items-center">
+            <button className="bg-zinc-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+              Yes
+            </button>
+            <button className="bg-zinc-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              No
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
     <button className="p-5 rounded-lg border-black border-2" onClick={() => createProposal()}>Create proposal</button>
   </div>;
 };
