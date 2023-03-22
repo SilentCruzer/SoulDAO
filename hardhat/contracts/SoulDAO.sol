@@ -68,7 +68,7 @@ contract SoulDAO {
         p.id = id;
         p.proposer = msg.sender;
         p.member = targetMember;
-        p.typ = typ == 0 ? ProposalType.Issue : ProposalType.Promote;
+        p.typ = ProposalType(typ);
         p.tokenURI = _tokenURI;
         p.yesVotes = 0;
         p.noVotes = 0;
