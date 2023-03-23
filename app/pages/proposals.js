@@ -20,6 +20,8 @@ const proposals = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [proposals , setProposals] = useState([]);
   const dataFetchedRef = useRef(false);
+  const [proposalType, setProposalType] = useState(0);
+  const [textValue, setTextValue] = useState("");
 
 
   useEffect(() => {
@@ -54,17 +56,35 @@ const proposals = () => {
   }, []);
 
   async function createProposal() {
-    const typ = 0;
-    const targetAddress = ethers.utils.hexlify("<insert target address here>");
-    const data = ""
+    const typ = proposalType;
+    const targetAddress = ethers.utils.hexlify(textValue);
+    var data = ""
+    console.log(proposalType)
+    if(typ==1){
+      data = "https://bafkreihu7s2xmkibjwin7ucp4hrxs7k55bkzljq5t7xg5nychrze75bqxy.ipfs.nftstorage.link/"
+    }
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const signer = provider.getSigner();
 
-    const create = await daoContract.connect(signer).createProposal(targetAddress, typ, data);
+    // const create = await daoContract.connect(signer).createProposal(targetAddress, typ, data);
 
-    console.log("Proposal created")
+    // console.log("Proposal created")
   }
+
+  const handleSelect = (event) => {
+    if (event.target.value === "Promote") {
+      setProposalType(1);
+    } else {
+      setProposalType(0);
+    }
+    
+  };
+
+  const handleTextChange = (event) => {
+    setTextValue(event.target.value);
+  };
+
 
   if (isLoading) {
     return (
@@ -95,8 +115,25 @@ const proposals = () => {
         </div>
       ))}
     </div>
+    <div className="flex gap-4">
+    <input
+        className="py-2 px-4 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        type="text"
+        id="textfield"
+        onChange={handleTextChange}
+        value={textValue}
+      />
+    <select
+      className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      onChange={handleSelect}
+    >
+      <option value="Promote">Promote</option>
+      <option value="Issue SBT">Issue SBT</option>
+    </select>
     <button className="p-5 rounded-lg border-black border-2" onClick={() => createProposal()}>Create proposal</button>
-  </div>;
+    </div>
+    
+  </div>
 };
 
 export default proposals;
