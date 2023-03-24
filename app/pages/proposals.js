@@ -61,15 +61,14 @@ const proposals = () => {
     var data = ""
     console.log(proposalType)
     if(typ==1){
-      data = "https://bafkreihu7s2xmkibjwin7ucp4hrxs7k55bkzljq5t7xg5nychrze75bqxy.ipfs.nftstorage.link/"
+      data = "https://bafkreieru5s6d3febncebsbpnurapg5bkc35ydb5koyyjp6l7eixihvckq.ipfs.nftstorage.link/"
     }
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const signer = provider.getSigner();
+    await daoContract.connect(signer).createProposal(targetAddress, typ, data);
 
-    // const create = await daoContract.connect(signer).createProposal(targetAddress, typ, data);
-
-    // console.log("Proposal created")
+    console.log("Proposal created")
   }
 
   const handleSelect = (event) => {
