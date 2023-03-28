@@ -71,6 +71,13 @@ const proposals = () => {
     console.log("Proposal created")
   }
 
+  async function vote(id, vote) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    await daoContract.connect(signer).voteForProposal(id, vote);
+  }
+
   const handleSelect = (event) => {
     if (event.target.value === "Promote") {
       setProposalType(1);
@@ -87,49 +94,51 @@ const proposals = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen text-white bg-zinc-800">
         <div>Loading......</div>
       </div>
     );
   }
 
-  return <div className="flex flex-col items-center justify-center h-screen">
+  return <div className="flex flex-col items-center justify-center h-screen text-white bg-zinc-800">
     <div className="flex flex-col">
       {proposals.map((proposal, index) => (
-        <div key={index} className="flex justify-between items-center bg-gray-100 p-4 mb-4 rounded-lg">
+        <div key={index} className="flex justify-between items-center bg-zinc-900 p-4 mb-4 rounded-lg text-white">
           <div>
-            <div className="text-lg font-semibold">Proposer: {proposal.proposer}</div>
-            <div className="text-lg font-semibold">Type: {proposal.typ}</div>
-            <div className="text-lg font-semibold">Target: {proposal.member}</div>
-            <div className="text-lg font-semibold">Yes votes: {proposal.yesVotes.toNumber()}</div>
+            <div className="text-lg font-semibold"><span className=" text-blue-500">Proposer: </span>{proposal.proposer}</div>
+            <div className="text-lg font-semibold"><span className=" text-blue-500">Type: </span>{proposal.typ == 0 ? "Issue" : "Promote"}</div>
+            <div className="text-lg font-semibold"><span className=" text-blue-500">Target: </span>{proposal.member}</div>
+            <div className="text-lg font-semibold"><span className=" text-blue-500">Yes votes: </span>{proposal.yesVotes.toNumber()}</div>
           </div>
           <div className="flex items-center">
-            <button className="bg-zinc-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
+            <button onClick={() => vote(proposal.id, 1)} className="bg-zinc-900 hover:bg-gray-700 border border-gray-300 text-white cursor-pointer font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
               Yes
             </button>
-            <button className="bg-zinc-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <button onClick={() => vote(proposal.id, 0)}className="bg-zinc-900 hover:bg-gray-700 border border-gray-300  text-white cursor-pointer font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
               No
             </button>
           </div>
         </div>
       ))}
     </div>
-    <div className="flex gap-4">
+    <div className="flex gap-4 h-12">
     <input
-        className="py-2 px-4 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="py-2 px-4 h-full mb-4 border border-gray-300 bg-zinc-900 text-white rounded-md shadow-sm focus:outline-none sm:text-sm"
         type="text"
         id="textfield"
+        enterKeyHint="hi"
+        placeholder="address eg: 0x98.."
         onChange={handleTextChange}
         value={textValue}
       />
     <select
-      className="py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      className="h-full border border-gray-300 bg-zinc-900 text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       onChange={handleSelect}
     >
       <option value="Promote">Promote</option>
       <option value="Issue SBT">Issue SBT</option>
     </select>
-    <button className="p-5 rounded-lg border-black border-2" onClick={() => createProposal()}>Create proposal</button>
+    <button className="h-full px-5 rounded-lg border-black bg-zinc-900 hover:bg-gray-700 cursor-pointer border-2" onClick={() => createProposal()}>Create proposal</button>
     </div>
     
   </div>

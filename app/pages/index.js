@@ -113,16 +113,16 @@ export default function MyComponent() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen text-white bg-zinc-800">
         <div>Loading......</div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen text-white bg-zinc-800">
       {!isWalletConnected && (
-        <>
+        <div>
           <h1 className="text-2xl font-bold mb-4">
             Please connect your wallet to continue
           </h1>
@@ -130,20 +130,20 @@ export default function MyComponent() {
           {walletErrorMessage && (
             <p className="text-red-500 text-sm mt-2">{walletErrorMessage}</p>
           )}
-        </>
+        </div>
       )}
       {isWalletConnected && hasToken && mappingResult && (
-        <>
+        <div className="border rounded-xl px-10 py-10 border-white flex flex-col items-center">
           <h1 className="text-2xl font-bold mb-4">Welcome back!</h1>
           <div className="flex flex-row gap-4">
-            <button onClick={() => router.push("/proposals")}>
+            <button onClick={() => router.push("/proposals")} className="hover:bg-white p-5 cursor-pointer hover:text-black rounded-xl">
               View Proposals
             </button>
-            <button onClick={() => console.log("View SBT clicked")}>
+            <button onClick={() => console.log("View SBT clicked")} className="hover:bg-white p-5 cursor-pointer hover:text-black rounded-xl">
               View SBT
             </button>
           </div>
-        </>
+        </div>
       )}
       {isWalletConnected && hasToken && !mappingResult && (
         <>
