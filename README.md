@@ -1,8 +1,8 @@
 # SoulDAO
+[![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-reason.svg)](https://forthebadge.com)
 
 ## Brief Overview
-
----
 
 The main goal of this project is to incorporate a Guild / Clans concept from books, games, and other media into a web ecosystem where people can earn status or level by showcasing their abilities/skills. A developer guild with levels/badges can help them gain more recognition for their skills while also opening up new opportunities.
 
@@ -36,3 +36,20 @@ To summarise the objectives:
 ***Motivation to build this out***
 
 - The main inspiration for this project came from observing certain organisations employing a rank system to identify members with specific skills. This reminded me of guild systems I've seen in books and role-playing games. The ranking system motivated members to work on specific projects and also assisted other members in finding collaborators for their projects. Seeing this ranking system made me realize how powerful it would be if it were implemented on a larger scale, where individuals, groups, startups, and companies could recruit members based on badges and reputation in the community.
+
+## Website
+### Made using:
+- Solidty
+- Hardhat
+- Next JS
+- Tailwind
+
+### Contracts
+- Membership Token  - [0x479921eEc6298D68C956CBA03329E5CDA6BD1062](https://goerli.etherscan.io/address/0x479921eEc6298D68C956CBA03329E5CDA6BD1062)
+- DAO contract - [0xf49e1DfDa3374e88C00B0890A9d66D004D0cbb49](https://goerli.etherscan.io/address/0xf49e1DfDa3374e88C00B0890A9d66D004D0cbb49)
+- SBT Contract  - [0x0071a41dE67dfCc1E8F1550173b7FbA8E32Ae53D](https://goerli.etherscan.io/address/0x0071a41dE67dfCc1E8F1550173b7FbA8E32Ae53D)
+
+#### MemberShip NFT - https://testnets.opensea.io/assets/goerli/0x479921eec6298d68c956cba03329e5cda6bd1062/1
+
+## Proposals screen
+![image](https://user-images.githubusercontent.com/73246484/229349182-7f8bec16-36c7-4a8e-95d6-542a7b7330e1.png)
