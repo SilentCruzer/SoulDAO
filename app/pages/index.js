@@ -133,17 +133,35 @@ export default function MyComponent() {
         </div>
       )}
       {isWalletConnected && hasToken && mappingResult && (
-        <div className="border rounded-xl px-10 py-10 border-white flex flex-col items-center">
-          <h1 className="text-2xl font-bold mb-4">Welcome back!</h1>
-          <div className="flex flex-row gap-4">
-            <button onClick={() => router.push("/proposals")} className="hover:bg-white p-5 cursor-pointer hover:text-black rounded-xl">
-              View Proposals
-            </button>
-            <button onClick={() => console.log("View SBT clicked")} className="hover:bg-white p-5 cursor-pointer hover:text-black rounded-xl">
-              View SBT
-            </button>
+        <div className="flex flex-col xl:flex-row w-full items-center justify-center h-screen text-white bg-zinc-800 overflow-x-hidden overflow-y-clip">
+        <div
+          className="flex-grow  h-full w-full flex flex-col justify-end p-16 gap-5 whitespace-normal overflow-hidden bg-gray-700 bg-cover bg-center transition duration-500 ease-in-out transform hover:scale-105"
+          style={{ backgroundImage: `url("/Proposals.png")`,}}
+        >
+          <div className="text-4xl font-extrabold dark:text-white">Proposals</div>
+          <p className="mb-4 text-lg font-normal text-gray-500 dark:text-gray-300">To see all of our current proposals related to Guild/Clan incorporation and 
+          badge creation, please access our governance system through our DAO that uses SBTs. From there, you can submit, 
+          review, and vote on proposals to help shape the future of SoulDAO.</p>
+          <button  onClick={() => router.push("/proposals")} className="border border-white rounded-lg w-fit p-5 text-lg hover:bg-white hover:text-black hover:cursor-pointer">View proposals</button>
+        </div>
+        <div className=" p-5 w-full flex flex-col items-center justify-center h-full xl:w-1/2 bg-black text-center gap-5">
+          <img src="/SoulDAO.png" className="w-1/6 xl:w-1/2"/>
+          <div className="text-4xl font-bold dark:text-white">SoulDAO</div>
+          <div>
+            Level up your skills and reputation with SoulDAO - where badges
+            represent true expertise!
           </div>
         </div>
+        <div
+          className="flex-grow h-full w-full flex flex-col justify-end p-16 gap-5 whitespace-normal overflow-hidden bg-gray-700 bg-cover bg-center transition duration-500 ease-in-out transform hover:scale-105"
+          style={{ backgroundImage: `url("/SBT.png")`,}}
+        >
+          <div className="text-4xl font-extrabold dark:text-white">SBT'S</div>
+          <p className="mb-4 text-lg font-normal text-gray-500 dark:text-gray-300">SBTs are earned through a rigorous review process by current members and are a public d
+          isplay of expertise in various fields, such as front-end development or dev-ops. To view your current SBTs and the badges you have earned, go through the button below</p>
+          <button onClick={() => console.log("View SBT clicked")}  className="border border-white rounded-lg w-fit p-5 text-lg hover:bg-white hover:text-black hover:cursor-pointer">View SBT's</button>
+        </div>
+      </div>
       )}
       {isWalletConnected && hasToken && !mappingResult && (
         <>
