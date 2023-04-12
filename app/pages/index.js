@@ -133,7 +133,7 @@ export default function MyComponent() {
         </div>
       )}
       {isWalletConnected && hasToken && mappingResult && (
-        <div className="flex flex-col xl:flex-row w-full items-center justify-center h-screen text-white bg-zinc-800 overflow-x-hidden overflow-y-clip">
+        <div className="flex flex-col xl:flex-row w-full items-center justify-center h-screen text-white bg-zinc-800 overflow-x-hidden xl:overflow-y-clip">
         <div
           className="flex-grow  h-full w-full flex flex-col justify-end p-16 gap-5 whitespace-normal overflow-hidden bg-gray-700 bg-cover bg-center transition duration-500 ease-in-out transform hover:scale-105"
           style={{ backgroundImage: `url("/Proposals.png")`,}}
@@ -144,7 +144,7 @@ export default function MyComponent() {
           review, and vote on proposals to help shape the future of SoulDAO.</p>
           <button  onClick={() => router.push("/proposals")} className="border border-white rounded-lg w-fit p-5 text-lg hover:bg-white hover:text-black hover:cursor-pointer">View proposals</button>
         </div>
-        <div className=" p-5 w-full flex flex-col items-center justify-center h-full xl:w-1/2 bg-black text-center gap-5">
+        <div className=" p-5 w-full flex flex-col items-center justify-center h-full xl:w-1/2 bg-black text-center gap-5" style={{ backgroundImage: `url("/background.jpg")`,}}>
           <img src="/SoulDAO.png" className="w-1/6 xl:w-1/2"/>
           <div className="text-4xl font-bold dark:text-white">SoulDAO</div>
           <div>
