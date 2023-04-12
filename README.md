@@ -52,6 +52,6 @@ To summarise the objectives:
 #### MemberShip NFT - https://testnets.opensea.io/assets/goerli/0x479921eec6298d68c956cba03329e5cda6bd1062/1
 
 ## ScreenShots
-![image](https://user-images.githubusercontent.com/73246484/231216909-e9957a22-f75a-48c5-a9f8-4f7092fddd79.png)
+![image](https://user-images.githubusercontent.com/73246484/231527066-3bc55995-f7a8-450f-b6ef-6db79b3e375b.png)
 
 ![image](https://user-images.githubusercontent.com/73246484/231526544-99085057-f754-4188-8a5f-3f290aa10d3b.png)
