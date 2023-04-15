@@ -16,7 +16,6 @@ const provider = new ethers.providers.JsonRpcProvider(
 
 const proposals = () => {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [walletErrorMessage, setWalletErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [proposals , setProposals] = useState([]);
   const dataFetchedRef = useRef(false);
